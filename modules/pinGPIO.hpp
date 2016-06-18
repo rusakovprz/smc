@@ -61,7 +61,7 @@ PinGPIO<PORT, DDR, PIN, BIT>::~PinGPIO()
 template<int PORT, int DDR, int PIN, int BIT>
 int PinGPIO<PORT, DDR, PIN, BIT>::initPin(bool inOut)
 {
-  // TODO: режи высокого входного сопротивления при рабте порта на вход.
+  // TODO: режим высокого входного сопротивления при рабте порта на вход.
 
   uint8_t* ptR;
   ptR = (uint8_t*) DDR; 
@@ -82,6 +82,8 @@ int PinGPIO<PORT, DDR, PIN, BIT>::initPin(bool inOut)
 template<int PORT, int DDR, int PIN, int BIT>
 void PinGPIO<PORT, DDR, PIN, BIT>::setPin(bool level)
 {
+  // TODO: ptR сделать членом класса.
+  //       Инициализировать переменную в конструкторе объекта.
   uint8_t* ptR;
   ptR = (uint8_t*) PORT;
    
@@ -105,4 +107,13 @@ bool PinGPIO<PORT, DDR, PIN, BIT>::getPin()
   
   return  *ptR & (1 << BIT);
 };
+
+
+typedef PinGPIO<0x2B, 0x2A, 0x29, 2> PinD2;
+typedef PinGPIO<0x2B, 0x2A, 0x29, 3> PinD3;
+typedef PinGPIO<0x2B, 0x2A, 0x29, 4> PinD4;
+typedef PinGPIO<0x2B, 0x2A, 0x29, 5> PinD5;
+typedef PinGPIO<0x2B, 0x2A, 0x29, 6> PinD6;
+typedef PinGPIO<0x2B, 0x2A, 0x29, 7> PinD7;
+
 
