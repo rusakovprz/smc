@@ -9,11 +9,12 @@ DEL_FILE      = rm -f
 
 SOURCES       = modules/phase.cpp \
                 modules_test/phase_test.cpp \
-                modules_test/test.cpp 
+                modules_test/test.cpp \
+                modules_test/stepMotor_test.cpp 
 #                modules_test/pinGPIO_test.cpp \
 #                modules_test/stepMotorPort_test.cpp \
 
-OBJECTS       = phase.o phase_test.o test.o 
+OBJECTS       = phase.o phase_test.o test.o stepMotor_test.o
 TARGET        = unit_tests
 
 all: $(TARGET)
@@ -32,6 +33,9 @@ pinGPIO_test.o: modules_test/pinGPIO_test.cpp modules/pinGPIO.hpp
 
 stepMotorPort_test.o: modules_test/stepMotorPort_test.cpp modules/stepMotorPort.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stepMotorPort_test.o modules_test/stepMotorPort_test.cpp
+
+stepMotor_test.o: modules_test/stepMotor_test.cpp modules/stepMotor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stepMotor_test.o modules_test/stepMotor_test.cpp
 
 test.o: modules_test/test.cpp modules/phase.cpp modules/phase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test.o modules_test/test.cpp
