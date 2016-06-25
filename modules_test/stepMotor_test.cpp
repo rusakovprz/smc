@@ -79,5 +79,31 @@ BOOST_AUTO_TEST_CASE (class_timeout_for_one_step_300_200)
 }
 
 
+BOOST_AUTO_TEST_CASE (getOverflow_8_16_8_1_1)
+{
+  BOOST_CHECK(StepMotor::getOverflow_8_16_8(1) == 1);
+}
+
+BOOST_AUTO_TEST_CASE (getOverflow_8_16_8_2_3)
+{
+  BOOST_CHECK(StepMotor::getOverflow_8_16_8(2) == 3);
+}
+
+BOOST_AUTO_TEST_CASE (getOverflow_8_16_8_3_5)
+{
+  BOOST_CHECK(StepMotor::getOverflow_8_16_8(3) == 5);
+}
+
+BOOST_AUTO_TEST_CASE (getOverflow_8_16_8_4_7)
+{
+  BOOST_CHECK(StepMotor::getOverflow_8_16_8(4) == 7);
+}
+
+BOOST_AUTO_TEST_CASE (getOverflow_8_16_8_128_255)
+{
+  BOOST_CHECK(StepMotor::getOverflow_8_16_8(128) == 255);
+}
+
+
 BOOST_AUTO_TEST_SUITE_END() 
 
