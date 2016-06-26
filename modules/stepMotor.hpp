@@ -15,14 +15,15 @@ public:
   {
     STOP = 0,
     LEFT,
-    RIGHT
+    RIGHT,
+    ANGLE
   };
 
 
   StepMotor(): 
         port_(),
         mode_(STOP),
-        phase_(phase::WAVE_DRIVER_MODE)
+        phase_(Phase::WAVE_DRIVER_MODE) // TODO: Добавить другие режимы.
   {  };
   
   ~StepMotor()  {};
@@ -46,9 +47,18 @@ public:
       return;
     };
 
-    // Полагаем, что таймвут таймера-счетчика 1 мс.
+    // Полагаем, что таймаут таймера-счетчика = 1 мс.
     passIntruptsTC_ = timeout_for_one_step(speed, 200);
   };
+
+
+  void setAngle(long angle)
+  {
+    // FIXME: angle_ и angle разные типы.
+    //        Проверить их размерность на целевой платформе.  
+    angle_ = angle;    
+  };
+
 
   /**
    * @brief Выполнение действия.
@@ -82,6 +92,32 @@ public:
     {
       state = phase_.right();      
     }
+
+    if(mode_ == ANGLE)
+    {
+      // FIXME: Смотри инициализацию phase_ в конструкторе. 
+      // Используется только один режим.
+
+      float angle_one_step = 1.8;
+
+      // Устраняем ошибку округления.
+      if(abs(angle_) < angle_one_step)
+      {
+        mode_ = STOP;
+      }
+      
+      if(angle_ > 0)
+      {
+        state = phase_.left();
+        angle_ -= angle_one_step;       
+      }
+      else
+      {
+        state = phase_.left();
+        angle_ += angle_one_step;
+      }
+    }
+
 
     port_.setPinA(std::get<0>(state));
     port_.setPinB(std::get<1>(state));
@@ -126,5 +162,7 @@ private:
 
   int passIntruptsTC_; // Число  пропусков прерваний ТС.
   int counterPassIntruptsTC_; // Счетчик числа  пропусков прерваний ТС.
+
+  float angle_;
 };
 
