@@ -5,6 +5,8 @@
   
 */
 
+#include <stdint.h>
+
 
 template<int PORT, int DDR, int PIN, int BIT>
 class PinGPIO
