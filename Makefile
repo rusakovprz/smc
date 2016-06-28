@@ -1,6 +1,6 @@
 
-CXX           = avr-g++ -mmcu=atmega328p # issue_#16
-#CXX           = g++
+#CXX           = avr-g++ -mmcu=atmega328p # issue_#16
+CXX           = g++
 CXXFLAGS      = -pipe -O2 -Wall -W -std=c++11
 INCPATH       = -I. -I./modules/
 LINK          = g++
@@ -42,7 +42,7 @@ test.o: modules_test/test.cpp modules/phase.cpp modules/phase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test.o modules_test/test.cpp
 
 
-test_avr_gcc: modules/phase.cpp modules/phase.h \
+test_avr_gcc: phase.o \
 				modules/pinGPIO.hpp \
 				modules/stepMotor.hpp \
 				modules/stepMotorPort.hpp \
