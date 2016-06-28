@@ -20,11 +20,15 @@ BOOST_AUTO_TEST_SUITE(stepMotor)
 
 typedef StepMotorPort<PinD2, PinD3, PinD4, PinD5> MotorPort;
 
+/*
+  Инстанс motor содержит что-то что обращается к целевой аппаратной платформе.
+  Это приводит к фатальному падению теста.
+
 BOOST_AUTO_TEST_CASE (object_matchSteps_1_8)
 {
-  StepMotor<StepMotorPort<PinD2, PinD3, PinD4, PinD5> > motor;
-  BOOST_CHECK(motor.matchSteps(1.8) == 200);
-}
+StepMotor<StepMotorPort<PinD2, PinD3, PinD4, PinD5> > motor;
+BOOST_CHECK(motor.matchSteps(1.8) == 200);
+} */
     
 BOOST_AUTO_TEST_CASE (class_matchSteps_1_8)
 {

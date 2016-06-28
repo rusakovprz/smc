@@ -8,11 +8,17 @@
 #ifndef SMC_PHASE_
 #define SMC_PHASE_
 
-#include <tuple>
-#include <vector>
+#include <stdint.h>
 
 
-typedef std::tuple<bool, bool, bool,bool> PhaseState;
+struct PhaseState
+{
+  bool A;
+  bool B;
+  bool C;
+  bool D;
+};
+
 
 class Phase
 {
@@ -45,17 +51,19 @@ public:
 
 private:
 
-  // Фазы обмоток двигателя, для выбранного способа управления. 
-  std::vector<PhaseState> phaseStates_;
-  
-  std::vector<PhaseState>::iterator iteratorPhaseStates_;
+  // Фазы обмоток двигателя, для выбранного способа управления.
+  // FIXME: Проверить возможность динамического выделения памяти и переписать. 
+  PhaseState phaseStates_[8];
+  uint8_t phaseStatesLen_;
+
+  uint8_t indexPhaseStates_;
 
   // Методы возвращают список фаз обмоток двигателя, для каждого "поддерживаемого"
   // способа управления.   
-  static std::vector<PhaseState> fabricPhaseStates(MODE mode);
-  static std::vector<PhaseState> fabricPhaseStatesWaveDriver();
-  static std::vector<PhaseState> fabricPhaseStatesFullStep();
-  static std::vector<PhaseState> fabricPhaseStatesHalfStep();
+  void fabricPhaseStates(MODE mode, PhaseState *state, uint8_t &len);
+  void fabricPhaseStatesWaveDriver(PhaseState *states, uint8_t &len);
+  void fabricPhaseStatesFullStep(PhaseState *states, uint8_t &len);
+  void fabricPhaseStatesHalfStep(PhaseState *states, uint8_t &len);
   
 };
 

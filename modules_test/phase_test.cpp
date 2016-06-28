@@ -25,13 +25,13 @@ const std::string boolToString(bool b)
 std::string PhaseStateToString(PhaseState phase)
 {
   std::string rezult = "(";
-  rezult += boolToString(std::get<0>(phase));
+  rezult += boolToString(phase.A);
   rezult += " ";
-  rezult += boolToString(std::get<1>(phase));
+  rezult += boolToString(phase.B);
   rezult += " ";
-  rezult += boolToString(std::get<2>(phase));
+  rezult += boolToString(phase.C);
   rezult += " ";
-  rezult += boolToString(std::get<3>(phase));
+  rezult += boolToString(phase.D);
   rezult += ")";
   return rezult;
 }
