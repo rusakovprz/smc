@@ -3,6 +3,7 @@
   
 */
 
+#include <stdlib.h>
 #include "phase.h"
 
 template<typename T>
@@ -119,10 +120,10 @@ public:
     }
 
 
-    port_.setPinA(std::get<0>(state));
-    port_.setPinB(std::get<1>(state));
-    port_.setPinC(std::get<2>(state));
-    port_.setPinD(std::get<3>(state));
+    port_.setPinA(state.A);
+    port_.setPinB(state.B);
+    port_.setPinC(state.C);
+    port_.setPinD(state.D);
 
   };
 
