@@ -8,38 +8,32 @@ LFLAGS        = -Wl,-O1
 LIBS          = -lboost_unit_test_framework
 DEL_FILE      = rm -f
 
-SOURCES       = modules/phase.cpp \
-                modules_test/phase_test.cpp \
-                modules_test/test.cpp \
-                modules_test/stepMotor_test.cpp 
-#                modules_test/pinGPIO_test.cpp \
-#                modules_test/stepMotorPort_test.cpp \
-
 OBJECTS       = phase.o phase_test.o test.o stepMotor_test.o
 TARGET        = unit_tests
 
+
 all: $(TARGET)
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET):  $(OBJECTS)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 phase.o: modules/phase.cpp modules/phase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o phase.o modules/phase.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 phase_test.o: modules_test/phase_test.cpp modules/phase.cpp modules/phase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o phase_test.o modules_test/phase_test.cpp
-	
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
 pinGPIO_test.o: modules_test/pinGPIO_test.cpp modules/pinGPIO.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pinGPIO_test.o modules_test/pinGPIO_test.cpp	
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 stepMotorPort_test.o: modules_test/stepMotorPort_test.cpp modules/stepMotorPort.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stepMotorPort_test.o modules_test/stepMotorPort_test.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 stepMotor_test.o: modules_test/stepMotor_test.cpp modules/stepMotor.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stepMotor_test.o modules_test/stepMotor_test.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 test.o: modules_test/test.cpp modules/phase.cpp modules/phase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test.o modules_test/test.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 
 test_avr_gcc: phase.o \
