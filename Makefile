@@ -25,24 +25,9 @@ $(TARGET):  $(OBJECTS)
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
 
-phase.o: modules/phase.cpp modules/phase.h
+include Makefile.dependencies
 
-phase_test.o: modules_test/phase_test.cpp modules/phase.cpp modules/phase.h
-
-pinGPIO_test.o: modules_test/pinGPIO_test.cpp modules/pinGPIO.hpp
-
-stepMotorPort_test.o: modules_test/stepMotorPort_test.cpp modules/stepMotorPort.hpp
-
-stepMotor_test.o: modules_test/stepMotor_test.cpp modules/stepMotor.hpp
-
-test.o: modules_test/test.cpp modules/phase.cpp modules/phase.h
-
-
-test_avr_gcc: phase.o \
-				modules/pinGPIO.hpp \
-				modules/stepMotor.hpp \
-				modules/stepMotorPort.hpp \
-				issue16.cpp
+test_avr_gcc:
 	$(CXX_AVR) -c $(CXXFLAGS) $(INCPATH) -o issue16.o issue16.cpp
 
 

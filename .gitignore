@@ -27,3 +27,11 @@
 *.exe
 *.out
 *.app
+
+smc.sublime-project
+smc.sublime-workspace
+
+tools_list.txt
+
+unit_tests
+
