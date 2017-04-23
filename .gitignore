@@ -1,3 +1,5 @@
+.gitignore
+
 # Compiled Object files
 *.slo
 *.lo
@@ -27,3 +29,9 @@
 *.exe
 *.out
 *.app
+
+links.txt
+smc.sublime-project
+smc.sublime-workspace
+tools_list.txt
+
