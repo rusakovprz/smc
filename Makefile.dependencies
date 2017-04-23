@@ -1,0 +1,22 @@
+#
+#	Содержит зависимости целлей сборки.
+#
+
+phase.o: modules/general/phase.cpp modules/general/phase.h
+
+phase_test.o: modules_test/phase_test.cpp modules/general/phase.cpp modules/general/phase.h
+
+pinGPIO_test.o: modules_test/pinGPIO_test.cpp modules/avr/pinGPIO.hpp
+
+stepMotorPort_test.o: modules_test/stepMotorPort_test.cpp modules/avr/stepMotorPort.hpp
+
+stepMotor_test.o: modules_test/stepMotor_test.cpp modules/avr/stepMotor.hpp
+
+test.o: modules_test/test.cpp modules/general/phase.cpp modules/general/phase.h
+
+phase_avr_gcc: modules/general/phase.cpp modules/general/phase.h
+
+test_avr_gcc: modules/avr/pinGPIO.hpp \
+				modules/avr/stepMotor.hpp \
+				modules/avr/stepMotorPort.hpp \
+				issue16.cpp
