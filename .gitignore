@@ -1,3 +1,5 @@
+.gitignore
+
 # Compiled Object files
 *.slo
 *.lo
@@ -34,4 +36,4 @@ smc.sublime-workspace
 tools_list.txt
 
 unit_tests
-
+links.txt
